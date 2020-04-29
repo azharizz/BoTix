@@ -26,3 +26,21 @@ Route::get('/home', function() {
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group([ 'middleware' => 'auth' ], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('ticket', 'TicketController');
+    Route::resource('balance', 'BalanceController');
+    // Route::resource('siswa', 'SiswaController');
+    // Route::resource('petugas', 'PetugasController');
+    // Route::resource('pembayaran', 'PembayaranController');
+    // Route::get('/history', 'PembayaranController@history');
+    // Route::get('/laporan', function () {
+    // return view('laporan');
+    // });
+    // route::get('/laporan/kelas', 'LaporanController@kelas');
+    // route::get('/laporan/spp', 'LaporanController@spp');
+    // route::get('/laporan/siswa', 'LaporanController@siswa');
+    // route::get('/laporan/petugas', 'LaporanController@petugas');
+    // route::get('/laporan/pembayaran', 'LaporanController@pembayaran');
+    });

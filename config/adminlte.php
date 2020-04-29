@@ -236,12 +236,12 @@ return [
         ],
         [
             'text'        => 'Ticket',
-            'url'         => 'admin/ticket',
+            'url'         => 'ticket',
             'icon'        => 'fas fa-ticket-alt',
         ],
         [
             'text'        => 'Balance',
-            'url'         => 'admin/balance',
+            'url'         => 'balance',
             'icon'        => 'fas fa-money-bill-wave',
         ],
 
