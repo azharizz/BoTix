@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Movie;
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 
-class BalanceController extends Controller
+class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +14,7 @@ class BalanceController extends Controller
      */
     public function index()
     {
-        // $idd=1;
-        $id=Auth::user()->id;
-        $user =  User::where('id', $id)->first();
-        // $data = User::where("id",$idd)->get;
-        // $tampil['data'] = $data;
-        return view("balance.index", compact('user'));
+        //
     }
 
     /**
@@ -47,10 +41,10 @@ class BalanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
         //
     }
@@ -58,10 +52,10 @@ class BalanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
         //
     }
@@ -70,31 +64,21 @@ class BalanceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
         //
-        $this->validate($request, [
-            'balance' => 'required',
-        ]);
-        $data = User::findOrFail($id);
-        $data->balance += $request->balance;
-        $data->save();
-        return redirect()->route("balance.index")->with(
-            "success",
-            "Data berhasil diubah."
-        );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
         //
     }
