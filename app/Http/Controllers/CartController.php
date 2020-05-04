@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cart;
+use App\Movie;
+use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {
@@ -15,7 +18,15 @@ class CartController extends Controller
     public function index()
     {
         //
-        return view("cart.index");
+        $id = Auth::user()->id;
+        $data = Cart::where("user_id", $id)->paginate(10);
+        $movie = Movie::paginate(4);
+
+        //membuat variabel tampil yang diisi dengan data
+        $tampil['data'] = $data;
+        $tampil['movie'] = $movie;
+        //tampilkan resources/views/kelas/index.blade.php beserta variabel tampil
+        return view("cart.index", $tampil);
     }
 
     /**
@@ -37,6 +48,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
