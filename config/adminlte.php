@@ -244,6 +244,11 @@ return [
             'url'         => 'balance',
             'icon'        => 'fas fa-money-bill-wave',
         ],
+        [
+            'text'        => 'Cart',
+            'url'         => 'cart',
+            'icon'        => 'fas fa-shopping-cart',
+        ],
 
         ['header' => 'account_settings'],
         [

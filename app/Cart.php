@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Movie extends Model
+class Cart extends Model
 {
     use Notifiable;
 
@@ -16,7 +16,7 @@ class Movie extends Model
      * @var array
      */
     protected $fillable = [
-        'nameMovie', 'description','studio', 'movieShow', 'price', 'image',
+        'user_id', 'movie_id','nameMovie', 'venue', 'dateBooking', 'timeBooking','totalTicket','totalPrice',
     ];
 
     /**

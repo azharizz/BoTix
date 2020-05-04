@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="balance" class="col control-label">Enter nominal for add to your balance:</label>
                             <div class="col-sm-10">
-                                <input type="numeric" name="balance" class="form-control" value="{{ $balance ?? '' }}" >
+                                <input type="numeric" name="balance" class="form-control" value="" >
                             </div>
                         </div>
 

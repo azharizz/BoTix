@@ -31,6 +31,7 @@ Route::group([ 'middleware' => 'auth' ], function () {
     // Route::get('/', 'HomeController@index')->name('home');
     Route::resource('ticket', 'TicketController');
     Route::resource('balance', 'BalanceController');
+    Route::resource('cart', 'CartController');
     // Route::resource('siswa', 'SiswaController');
     // Route::resource('petugas', 'PetugasController');
     // Route::resource('pembayaran', 'PembayaranController');

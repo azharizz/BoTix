@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use Illuminate\Http\Request;
 use App\Movie;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -28,22 +30,18 @@ class TicketController extends Controller
      */
     public function create()
     {
-        $data = Movie::paginate(4);
-        //membuat variabel tampil yang diisi dengan data
-        $tampil['data'] = $data;
-        //tampilkan resources/views/kelas/index.blade.php beserta variabel tampil
-        return view("ticket.detail",$tampil);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -83,7 +81,28 @@ class TicketController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'studio' => 'required',
+            'totalPrice' => 'required',
+            'dateBooking' => 'required',
+            'timeBooking' => 'required',
+            'totalTicket' => 'required'
+        ]);
+
+        $idUser=Auth::user()->id;
+        $tTicket=$request->totalTicket;
+        $tPrice=($request->totalPrice)*$tTicket;
+        
+        $request->merge(['totalPrice' => $tPrice]);
+        $request->merge(['user_id' => $idUser]);
+        $request->merge(['movie_id' => $id]);
+        $request->merge(['payed' => 1]);
+
+        $data = Cart::create($request->all());
+        return redirect()->route("cart.index")->with(
+            "success",
+            "Data berhasil disimpan."
+        );
     }
 
     /**
@@ -102,14 +121,14 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function buy()
-    {
-        $data = Movie::paginate(4);
-        //membuat variabel tampil yang diisi dengan data
-        $tampil['data'] = $data;
-        //tampilkan resources/views/kelas/index.blade.php beserta variabel tampil
-        return view("ticket.detail",$tampil);
-    }
+    // public function buy()
+    // {
+    //     $data = Movie::paginate(4);
+    //     //membuat variabel tampil yang diisi dengan data
+    //     $tampil['data'] = $data;
+    //     //tampilkan resources/views/kelas/index.blade.php beserta variabel tampil
+    //     return view("ticket.detail",$tampil);
+    // }
 
 
 }
