@@ -7,8 +7,14 @@
 @stop
 
 @section('content')
-<div class="container">
+<div class="row justify-content-center">
+    <div class="card">
+        <div class="card-body">
+          Money you have : {{$user->balance}}
+        </div>
+      </div>
     <div class="row justify-content-center">
+        
         @forelse ($data as $item)
         @forelse ($movie as $itemMovie)
             @if (($item->movie_id)==($itemMovie->idMovie))
@@ -23,8 +29,18 @@
                         <h5 class="card-title" style="font-size:24px">{{ $itemMovie->nameMovie }}</h5>
                         <br>
                         <br>  
-                        <p class="card-text">{{ $itemMovie->description }}</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <p class="card-text">Studio : {{ $itemMovie->studio }}</p>
+                        <p class="card-text">Date Show : {{ $item->dateBooking }}</p>
+                        <p class="card-text">Time Show : {{ $item->timeBooking }}</p>
+                        <p class="card-text">Total Ticket : {{ $item->totalTicket }}</p>
+                        <p class="card-text">Total Price : {{ $item->totalPrice }}</p>
+                        @if ($itemMovie->payed==0)
+                        <p class="card-text">Status : Waiting pay</p>
+                        @else
+                        <p class="card-text">Status : Payed</p>
+                            
+                        @endif
+                        <a href=""  class="btn btn-primary" style="float: right">Pay ticket</a>
                         </div>
                     </div>
                     </div>

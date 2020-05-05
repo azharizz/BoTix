@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Movie;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -19,12 +20,14 @@ class CartController extends Controller
     {
         //
         $id = Auth::user()->id;
+        $user =  User::where('id', $id)->first();
         $data = Cart::where("user_id", $id)->paginate(10);
         $movie = Movie::paginate(4);
 
         //membuat variabel tampil yang diisi dengan data
         $tampil['data'] = $data;
         $tampil['movie'] = $movie;
+        $tampil['user']=$user;
         //tampilkan resources/views/kelas/index.blade.php beserta variabel tampil
         return view("cart.index", $tampil);
     }
