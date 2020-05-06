@@ -249,6 +249,11 @@ return [
             'url'         => 'cart',
             'icon'        => 'fas fa-shopping-cart',
         ],
+        [
+            'text'        => 'Receipt',
+            'url'         => 'receipt',
+            'icon'        => 'fas fa-receipt',
+        ],
 
         ['header' => 'account_settings'],
         [

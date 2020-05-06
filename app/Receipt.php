@@ -3,14 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Cart extends Model
+class Receipt extends Model
 {
+    //
     use Notifiable;
-
-    protected $primaryKey = 'idCart';
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +16,7 @@ class Cart extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'movie_id','nameMovie', 'venue', 'dateBooking', 'timeBooking','totalTicket','totalPrice',
+        'user_id', 'movie_id','cart_id', 'seat', 'payed',
     ];
 
     /**

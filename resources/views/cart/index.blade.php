@@ -15,6 +15,7 @@
       </div>
     <div class="row justify-content-center">
         
+        
         @forelse ($data as $item)
         @forelse ($movie as $itemMovie)
             @if (($item->movie_id)==($itemMovie->idMovie))
@@ -34,14 +35,24 @@
                         <p class="card-text">Time Show : {{ $item->timeBooking }}</p>
                         <p class="card-text">Total Ticket : {{ $item->totalTicket }}</p>
                         <p class="card-text">Total Price : {{ $item->totalPrice }}</p>
-                        @if ($itemMovie->payed==0)
-                        <p class="card-text">Status : Waiting pay</p>
-                        @else
+                        @if ($item->payed==1)
                         <p class="card-text">Status : Payed</p>
+                        @else
+                        <p class="card-text">Status : Waiting pay</p>
                             
                         @endif
-                        <a href=""  class="btn btn-primary" style="float: right">Pay ticket</a>
-                        </div>
+
+                        <form class="form-horizontal" action="{{ route('cart.store') }}" method="post">
+                            {{ csrf_field() }}
+                            {{-- {{ method_field('PUT') }} --}}
+                            <input type="hidden" id="custId" name="user_id" value="{{$item->user_id}}">
+                            <input type="hidden" id="custId" name="movie_id" value="{{$item->movie_id}}">
+                            <input type="hidden" id="custId" name="cart_id" value="{{$item->idCart}}">
+                            <input type="hidden" id="custId" name="payed" value=1>
+                            <input type="submit" class="btn btn-success btn-md" style="font-size:24px;" name="Pay" value="Pay Ticket">
+                            {{-- <a href="{{ route('cart.update', ['cart' => $item->idCart]) }}" method="post"  class="btn btn-primary" style="float: right" >Pay ticket</a> --}}
+                        </form>    
+                    </div>
                     </div>
                     </div>
                 </div>
