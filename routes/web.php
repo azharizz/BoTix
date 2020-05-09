@@ -33,6 +33,7 @@ Route::group([ 'middleware' => 'auth' ], function () {
     Route::resource('balance', 'BalanceController');
     Route::resource('cart', 'CartController');
     Route::resource('receipt', 'ReceiptController');
+    Route::resource('cart.delete', 'CartController');
     // Route::resource('siswa', 'SiswaController');
     // Route::resource('petugas', 'PetugasController');
     // Route::resource('pembayaran', 'PembayaranController');

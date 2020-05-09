@@ -120,36 +120,36 @@ class CartController extends Controller
     {
         //
         
-        $idUser = Auth::user()->id;
-        $user =  User::where('id', $idUser)->first();
-        $data = Cart::where("idCart", $id)->first();
-        $movie = Movie::where("idMovie", $data->movie_id)->first();
-        $user->balance -= $data->totalPrice;
-        $data->save();
+        // $idUser = Auth::user()->id;
+        // $user =  User::where('id', $idUser)->first();
+        // $data = Cart::where("idCart", $id)->first();
+        // $movie = Movie::where("idMovie", $data->movie_id)->first();
+        // $user->balance -= $data->totalPrice;
+        // $data->save();
 
-        $this->validate($request,[
-            'user_id' => $idUser,
-            'movie_id' => $data->movie_id,
-            'cart_id' => $id,
-            'payed' => 1,
-        ]);
+        // $this->validate($request,[
+        //     'user_id' => $idUser,
+        //     'movie_id' => $data->movie_id,
+        //     'cart_id' => $id,
+        //     'payed' => 1,
+        // ]);
         
-        // $request->merge(['user_id' => $idUser]);
-        // $request->merge(['movie_id' => $data->movie_id]);
-        // $request->merge(['cart_id' => $id]);
-        // $request->merge(['payed' => 1]);
+        // // $request->merge(['user_id' => $idUser]);
+        // // $request->merge(['movie_id' => $data->movie_id]);
+        // // $request->merge(['cart_id' => $id]);
+        // // $request->merge(['payed' => 1]);
 
-        $tampil['data'] = $data;
-        $tampil['movie'] = $movie;
-        $tampil['user']=$user;
+        // $tampil['data'] = $data;
+        // $tampil['movie'] = $movie;
+        // $tampil['user']=$user;
 
 
-        $data = Receipt::create($request->all());
-        return view("balance.index",$tampil);
-        // return redirect()->route("home.index")->with(
-        //     "success",
-        //     "Data berhasil disimpan."
-        // );
+        // $data = Receipt::create($request->all());
+        // return view("balance.index",$tampil);
+        // // return redirect()->route("home.index")->with(
+        // //     "success",
+        // //     "Data berhasil disimpan."
+        // // );
     }
 
     /**
@@ -163,6 +163,29 @@ class CartController extends Controller
         //
         $data = Cart::findOrFail($id);
         $data->delete();
+        // return view("ticket.index");
+        // return redirect()->route("ticket.index")->with(
+        //     "success",
+        //     "Data berhasil dihapus."
+        // );
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function delete(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'id_cart' => 'required',
+        ]);
+        $data = Cart::findOrFail($request->id_cart);
+        $data->delete();
+        // return view("ticket.index");
         return redirect()->route("ticket.index")->with(
             "success",
             "Data berhasil dihapus."

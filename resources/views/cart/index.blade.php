@@ -51,12 +51,27 @@
                             <input type="hidden" id="custId" name="cart_id" value="{{$item->idCart}}">
                             <input type="hidden" id="custId" name="payed" value=1>
                             <input type="submit" class="btn btn-success btn-md" style="font-size:24px;" name="Pay" value="Pay Ticket">
-                            {{-- <a href="{{ route('cart.update', ['cart' => $item->idCart]) }}" method="post"  class="btn btn-primary" style="float: right" >Pay ticket</a> --}}
+                            {{-- <a href="{{ route('cart.destroy', ['cart' => $item->idCart]) }}" method="post"  class="btn btn-primary" style="float: right" >Delete Booking Ticket</a> --}}
                         </form>
+
                         @if ($item->payed==0)
-                        <a href="{{ route('cart.destroy', ['cart' => $item->idCart]) }}"  class="btn btn-danger" style="float: right">Delete Booking Ticket</a>
+                        <a class="btn btn-primary" onclick="hapus('{{ $item->idCart }}')" href="#">
+                            <i class="fas fa-trash"></i>
+                        </a>
+
+
+                        {{-- <form class="form-horizontal" action="{{ route('cart.delete') }}" >
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" id="custId" name="cart_id" value="{{$item->idCart}}">
+                            <input type="submit" class="btn btn-success btn-md" name="add" value="Add">
+                        </form> --}}
+                        {{-- <a href="{{ route('cart.destroy', ['cart' => $item->idCart]) }}"  class="btn btn-danger" style="float: right">Delete Booking Ticket</a> --}}
+                        
                         @else
                         @endif
+                        {{-- <a href="{{ route('cart.destroy', ['cart' => $item->idCart]) }}"  class="btn btn-danger" style="float: right">Delete Booking Ticket</a> --}}
 
                     </div>
                     </div>
@@ -75,5 +90,51 @@
 
     </div>
 </div>
+@stop
+@section('plugins.Sweetalert2', true)
+@section('plugins.Pace', true)
+@section('js')
+@if (session('success'))
+<script type="text/javascript">
+    Swal.fire(
+        'Sukses!',
+        '{{ session('success') }}',
+        'success'
+    )
+</script>
+@endif
+@section('js')
+<script type="text/javascript">
+    function hapus(id) {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: "Yakin menghapus data ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#dd3333',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "/cart/" + id,
+                    type: 'DELETE',
+                    data: {
+                        '_token': $('meta[name=csrf-token]').attr("content"),
+                    },
+                    success: function(result) {
+                        Swal.fire(
+                            'Sukses!',
+                            'Berhasil Hapus',
+                            'success'
+                        );
+                        location.reload();
+                    }
+                });
+            }
+        })
+    }
+</script>
 
 @stop
