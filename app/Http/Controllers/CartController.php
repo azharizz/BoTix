@@ -161,5 +161,11 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+        $data = Cart::findOrFail($id);
+        $data->delete();
+        return redirect()->route("ticket.index")->with(
+            "success",
+            "Data berhasil dihapus."
+        );
     }
 }

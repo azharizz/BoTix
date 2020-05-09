@@ -99,7 +99,8 @@ class TicketController extends Controller
         $request->merge(['payed' => 1]);
 
         $data = Cart::create($request->all());
-        return redirect()->route("cart.index")->with(
+        // return view("ticket.seat");
+        return redirect()->route("ticket.index")->with(
             "success",
             "Data berhasil disimpan."
         );
@@ -121,14 +122,6 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function buy()
-    // {
-    //     $data = Movie::paginate(4);
-    //     //membuat variabel tampil yang diisi dengan data
-    //     $tampil['data'] = $data;
-    //     //tampilkan resources/views/kelas/index.blade.php beserta variabel tampil
-    //     return view("ticket.detail",$tampil);
-    // }
 
 
 }

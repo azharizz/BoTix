@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Cart</h1>
+    <h1 class="m-0 text-dark">Receipt</h1>
 @stop
 
 @section('content')
@@ -13,6 +13,7 @@
           Money you have : {{$user->balance}}
         </div>
       </div>
+</div>
     <div class="row justify-content-center">
         
         {{-- @forelse ($receipt as $itemReceipt) --}}
@@ -40,9 +41,9 @@
                             <p class="card-text">Status : Payed</p>
                             @else
                             <p class="card-text">Status : Waiting pay</p>
-                                
+
                             @endif
-    
+                            <a href="{{ route('receipt.show', ['receipt' => $item->idCart]) }}"  class="btn btn-primary" style="float: right">Show Ticket</a>
                         </div>
                         </div>
                         </div>

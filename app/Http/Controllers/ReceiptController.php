@@ -53,6 +53,7 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
@@ -64,6 +65,13 @@ class ReceiptController extends Controller
     public function show($id)
     {
         //
+        $data = Cart::where("idCart",$id)->first();
+        $movie = Movie::paginate(4);
+
+        $tampil['data'] = $data;
+        $tampil['movie'] = $movie;
+
+        return view("receipt.detail", $tampil);
     }
 
     /**

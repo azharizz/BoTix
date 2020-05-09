@@ -13,6 +13,7 @@
           Money you have : {{$user->balance}}
         </div>
       </div>
+</div>
     <div class="row justify-content-center">
         
         
@@ -51,7 +52,12 @@
                             <input type="hidden" id="custId" name="payed" value=1>
                             <input type="submit" class="btn btn-success btn-md" style="font-size:24px;" name="Pay" value="Pay Ticket">
                             {{-- <a href="{{ route('cart.update', ['cart' => $item->idCart]) }}" method="post"  class="btn btn-primary" style="float: right" >Pay ticket</a> --}}
-                        </form>    
+                        </form>
+                        @if ($item->payed==0)
+                        <a href="{{ route('cart.destroy', ['cart' => $item->idCart]) }}"  class="btn btn-danger" style="float: right">Delete Booking Ticket</a>
+                        @else
+                        @endif
+
                     </div>
                     </div>
                     </div>
